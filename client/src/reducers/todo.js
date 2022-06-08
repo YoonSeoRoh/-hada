@@ -9,10 +9,8 @@ export const todoSlice = createSlice({
       const nextId =
         state.length !== 0 ? Math.max(...state.map((todo) => todo.id)) + 1 : 0;
       state.push({ id: nextId, text: action.payload, done: false });
-      console.log(state[0].id);
     },
     toggleTodo: (state, action) => {
-      console.log(action.payload);
       return state.map((todo) => {
         return todo.id === action.payload
           ? { ...todo, done: !todo.done }
@@ -20,12 +18,15 @@ export const todoSlice = createSlice({
       });
     },
     removeTodo: (state, action) => {
-      console.log(action.payload);
       return state.filter((todo) => todo.id !== action.payload);
+    },
+    removeAllTodo: (state, action) => {
+      return (state = []);
     },
   },
   extraReducers: {},
 });
 
-export const { addTodo, toggleTodo, removeTodo } = todoSlice.actions;
+export const { addTodo, toggleTodo, removeTodo, removeAllTodo } =
+  todoSlice.actions;
 export default todoSlice;

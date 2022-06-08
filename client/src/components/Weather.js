@@ -1,20 +1,24 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getWeatherThunk } from "../actions/weather";
+import { useSelector } from "react-redux";
 
 function Weather() {
-  // const dispatch = useDispatch();
-  // const data = useSelector((state) => state.weather.data);
-  // useEffect(() => {
-  //   dispatch(getWeatherThunk());
-  //   console.log(data);
-  // });
-  // const { main, temperature } = useSelector((state) => ({
-  //   main: state.weather.data,
-  //   temperature: state.weather.data,
-  // }));
-  return <div></div>;
+  const { data, loading, error } = useSelector((state) => state.weather);
+  return (
+    <div>
+      {data !== null && !loading ? (
+        <div>
+          {data.weather[0].main}
+          {(data.main.temp - 273.15).toFixed(2)}
+          <img
+            src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+            alt="weather"
+          />
+        </div>
+      ) : (
+        "Loading"
+      )}
+    </div>
+  );
 }
 
 export default Weather;

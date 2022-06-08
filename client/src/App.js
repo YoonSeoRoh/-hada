@@ -1,11 +1,20 @@
 import "./App.css";
-import TodoList from "./components/TodoList";
-//import Weather from "./components/Weather";
+import { createGlobalStyle } from "styled-components";
+import Main from "./pages/Main";
+
+const GlobalStyles = createGlobalStyle`
+  :root{
+    --purple: #4948FD;
+    --orange: #FFAE47;
+    --white: #FFFFFF;
+  }
+`;
 
 function App() {
   return (
     <div className="App">
-      <TodoList />
+      <GlobalStyles />
+      <Main />
     </div>
   );
 }
