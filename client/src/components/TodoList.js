@@ -22,7 +22,9 @@ function TodoList() {
         <button type="submit">ADD</button>
       </form>
       {todoList.length !== 0
-        ? todoList.map((todo) => <Todo key={todo.id} text={todo.text} />)
+        ? todoList.map((todo) => (
+            <Todo key={todo.id} id={todo.id} text={todo.text} />
+          ))
         : `Loading...`}
     </div>
   );
