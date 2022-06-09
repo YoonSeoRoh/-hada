@@ -11,13 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWeatherThunk } from "../actions/weather";
 
 const Container = styled.section`
-  overflow: hidden;
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.backgroundColor};
 `;
 
 const Block = styled.div`
@@ -25,11 +23,12 @@ const Block = styled.div`
   height: 80vh;
   background-color: var(--white);
   margin: 20px;
+  text-align: center;
 `;
 
 function Main() {
   const { data, loading, error } = useSelector((state) => state.weather);
-  const theme = useSelector((state) => state.theme.darkThemeEnabled);
+  //const theme = useSelector((state) => state.theme.darkThemeEnabled);
   const dispatch = useDispatch();
   useEffect(() => {
     if (data !== null) return;
@@ -39,9 +38,7 @@ function Main() {
   return (
     <>
       {!loading && data ? (
-        <Container
-          backgroundColor={theme ? "var(--dark-bg)" : "var(--light-bg)"}
-        >
+        <Container>
           <Block width="30%">
             <Clock />
             <Weather />

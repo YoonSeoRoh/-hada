@@ -1,7 +1,9 @@
 import "./App.css";
 import Main from "./pages/Main";
-import { useSelector } from "react-redux";
+import Dairy from "./pages/Dairy";
 import styled, { createGlobalStyle } from "styled-components";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -13,12 +15,25 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.section`
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
 function App() {
+  const theme = useSelector((state) => state.theme.darkThemeEnabled);
   return (
-    <div className="App">
+    <Container backgroundColor={theme ? "var(--dark-bg)" : "var(--light-bg)"}>
       <GlobalStyle />
-      <Main />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/dairy" element={<Dairy />} />
+        </Routes>
+      </BrowserRouter>
+    </Container>
   );
 }
 

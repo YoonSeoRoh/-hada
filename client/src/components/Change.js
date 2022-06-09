@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { switchTheme } from "../reducers/theme";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const ModeBtn = styled.button`
+const StyledBtn = styled.button`
   margin: 10px;
   margin-top: 15px;
   width: 100px;
@@ -11,31 +12,23 @@ const ModeBtn = styled.button`
   border-radius: 5px;
   background-color: var(--gray);
   font-weight: 600;
-`;
-
-const DiaryBtn = styled.button`
-  margin: 10px;
-  margin-top: 15px;
-  width: 100px;
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--gray);
-  font-weight: 600;
+  cursor: pointer;
 `;
 
 function Change() {
   const dispatch = useDispatch();
   return (
     <div>
-      <ModeBtn
+      <StyledBtn
         onClick={() => {
           dispatch(switchTheme());
         }}
       >
         MODE
-      </ModeBtn>
-      <DiaryBtn>DAIRY</DiaryBtn>
+      </StyledBtn>
+      <Link to="/dairy">
+        <StyledBtn>DAIRY</StyledBtn>
+      </Link>
     </div>
   );
 }
