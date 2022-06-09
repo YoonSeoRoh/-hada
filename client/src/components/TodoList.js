@@ -5,20 +5,39 @@ import { addTodo, removeAllTodo } from "../reducers/todo";
 import Todo from "./Todo";
 
 const FormBlock = styled.div`
-  color: white;
   margin: 10px;
 `;
 
 const StyledInput = styled.input`
   background-color: transparent;
   border: none;
-  border-bottom: 1.5px solid white;
+  border-bottom: 1.5px solid;
+  margin: 10px;
+  :focus {
+    outline: none;
+  }
+`;
+
+const RemoveAllBtn = styled.button`
+  margin: 10px;
+  margin-top: 15px;
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--gray);
+  font-weight: 600;
 `;
 
 const AddBtn = styled.button`
-  background-color: transparent;
-  border: 1.5px solid white;
+  background-color: var(--gray);
+  border: none;
   border-radius: 5px;
+  width: 65px;
+  height: 25px;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: 600;
 `;
 
 function TodoList() {
@@ -47,7 +66,9 @@ function TodoList() {
             <Todo key={todo.id} id={todo.id} text={todo.text} />
           ))
         : `투두리스트를 작성해보세요`}
-      {todoList.length !== 0 && <button onClick={removeAll}>REMOVE ALL</button>}
+      {todoList.length !== 0 && (
+        <RemoveAllBtn onClick={removeAll}>REMOVE ALL</RemoveAllBtn>
+      )}
     </FormBlock>
   );
 }

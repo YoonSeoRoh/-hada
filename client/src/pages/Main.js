@@ -3,41 +3,53 @@ import styled from "styled-components";
 import Weather from "../components/Weather";
 import TodoList from "../components/TodoList";
 import Clock from "../components/Clock";
+import Change from "../components/Change";
 import Loading from "../components/Loading";
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeatherThunk } from "../actions/weather";
 
-const Container = styled.div`
+const Container = styled.section`
+  overflow: hidden;
   width: 100%;
   height: 100vh;
-  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
+const Block = styled.div`
+  width: ${(props) => props.width};
+  height: 80vh;
+  background-color: var(--white);
+  margin: 20px;
 `;
 
 function Main() {
   const { data, loading, error } = useSelector((state) => state.weather);
-  //const [color, setColor] = useState("");
+  const theme = useSelector((state) => state.theme.darkThemeEnabled);
   const dispatch = useDispatch();
   useEffect(() => {
     if (data !== null) return;
     dispatch(getWeatherThunk());
-    //setColor(data.main.temp);
   }, [data, dispatch]);
 
   return (
     <>
       {!loading && data ? (
         <Container
-          style={
-            (data.main.temp - 273.15).toFixed(2) > 18
-              ? { backgroundColor: "var(--orange)" }
-              : { backgroundColor: "var(--purple)" }
-          }
+          backgroundColor={theme ? "var(--dark-bg)" : "var(--light-bg)"}
         >
-          <Clock />
-          <Weather />
-          <TodoList />
+          <Block width="30%">
+            <Clock />
+            <Weather />
+            <Change />
+          </Block>
+          <Block width="60%">
+            <TodoList />
+          </Block>
         </Container>
       ) : (
         <Loading />

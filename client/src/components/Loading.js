@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Spinner from "../asset/spinner.gif";
 
 const Background = styled.div`
   position: absolute;
@@ -15,14 +16,16 @@ const Background = styled.div`
 `;
 
 const LoadingText = styled.div`
-  font-size: 15px;
+  font-size: 30px;
+  font-weight: 800;
   text-align: center;
 `;
 
 export default function Loading() {
   return (
     <Background>
-      <LoadingText>Loading</LoadingText>
+      <LoadingText>LOADING</LoadingText>
+      <img src={Spinner} alt="로딩중"></img>
     </Background>
   );
 }
